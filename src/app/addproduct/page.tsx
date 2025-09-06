@@ -27,18 +27,6 @@ export default function AddProductPage() {
     <section className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-[#131824] to-[#1c2133] font-sans">
       <div className="max-w-2xl w-full mx-auto backdrop-blur-lg bg-[#23293a]/80 rounded-3xl shadow-2xl border border-[#39415c] p-10 transition-all duration-500 hover:shadow-indigo-800/40">
         
-        {/* Header */}
-        <div className="flex justify-between items-center mb-10">
-         
-          <div className="flex items-center gap-6">
-            <div className="relative text-2xl cursor-pointer text-white">
-             
-
-            </div>
-            <div className="w-10 h-10 border border-white rounded-full cursor-pointer hover:scale-105 transition-transform"></div>
-          </div>
-        </div>
-
         {/* Title */}
         <h2 className="text-white text-3xl mb-8 text-center font-semibold tracking-wide">
           Add a New Product

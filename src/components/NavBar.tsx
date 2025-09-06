@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
                 
                 {session && (
                     <>
-                    <Link href="/my-listings" className="hover:text-green-600">My Listings</Link>
+                    <Link href="profile/listings" className="hover:text-green-600">My Listings</Link>
                     <Link href="/addproduct" className="hover:text-green-600">Add Product</Link>
                 </>
                 )}
@@ -69,7 +69,7 @@ const NavBar: React.FC = () => {
                                         Profile
                                     </Link>
                                     <Link
-                                        href="/my-listings"
+                                        href="/profile/listings"
                                         className="block px-4 py-2 hover:bg-gray-100"
                                         onClick={() => setProfileOpen(false)}
                                     >
@@ -104,7 +104,7 @@ const NavBar: React.FC = () => {
                     </Link>
                     {session && (
                         <Link
-                            href="/my-listings"
+                            href="profile/listings"
                             className="block px-4 py-2 hover:bg-gray-100"
                             onClick={() => setMenuOpen(false)}
                         >
