@@ -41,7 +41,7 @@ export default function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#131824] font-sans text-white px-4 py-8">
+    <div className="min-h-screen  font-sans text-white px-4 py-8">
       <div className="max-w-4xl mx-auto bg-[#23293a] rounded-xl p-6 shadow-lg">
         <h1 className="text-3xl font-bold mb-6">Your Cart (UK)</h1>
         {cartItems.length === 0 ? (
