@@ -88,7 +88,7 @@ export default function MyListings() {
                   {item.title}
                 </div>
                 <div className="text-green-600 font-semibold text-lg mb-1">
-                  £{item.price}
+                  Rs. {item.price}
                 </div>
                 <div className="text-sm text-gray-600 mb-1">
                   <span className="font-semibold">Category:</span>{" "}

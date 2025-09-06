@@ -8,7 +8,7 @@ const mockPurchases: Purchase[] = [
   {
     id: 1,
     name: "Eco Water Bottle",
-    price: "$12.99",
+    price: "Rs. 1299",
     category: "Home",
     seller: "GreenStore",
     imageUrl: "",
@@ -16,7 +16,7 @@ const mockPurchases: Purchase[] = [
   {
     id: 2,
     name: "Reusable Bag",
-    price: "$5.49",
+    price: "Rs. 549",
     category: "Accessories",
     seller: "EcoMart",
     imageUrl: "",
@@ -24,7 +24,7 @@ const mockPurchases: Purchase[] = [
   {
     id: 3,
     name: "Bamboo Toothbrush",
-    price: "$3.99",
+    price: "Rs. 399",
     category: "Personal Care",
     seller: "NatureShop",
     imageUrl: "",
