@@ -1,49 +1,51 @@
 // pages/profile.tsx or app/profile/page.tsx
-'use client';
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import ProfilePage from '../../components/ProfilePage';
-
-interface UserProfile {
-  id: string;
-  profilePicture?: string;
-  username: string;
-  email: string;
-  phone?: string;
-  bio?: string;
-  joinDate: string;
-}
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
+import ProfilePage from "../../components/ProfilePage";
+import { useSession } from "next-auth/react";
+import type { UserProfile } from "../../types";
 
 const Profile: React.FC = () => {
   const router = useRouter();
 
-  // Mock user data - replace with your data fetching logic
+  const { data: session } = useSession();
+
+  React.useEffect(() => {
+    if (!session) {
+      router.push("/auth/login");
+    }
+  }, [session, router]);
+
+  if (!session) {
+    return null;
+  }
+
   const user: UserProfile = {
-    id: '1',
-    username: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    bio: 'Passionate about technology and innovation',
-    joinDate: 'March 2023',
-    profilePicture: '/default-avatar.png', // Optional
+    id: session?.user.id ?? "",
+    username: session?.user.name ?? "",
+    email: session?.user.email ?? "",
+    phone: session?.user.phone ?? "Not provided",
+    bio: session?.user.description ?? "This user has no bio.",
+    profilePicture: session?.user.image ?? undefined,
   };
 
   const handleEditProfile = () => {
-    router.push('/profile/edit');
+    router.push("/profile/edit");
   };
 
   const handleViewListings = () => {
-    router.push('/profile/listings');
+    router.push("/profile/listings");
   };
 
   const handleViewPurchases = () => {
-    router.push('/profile/purchases');
+    router.push("/profile/purchases");
   };
 
   const handleUpdateProfilePicture = async (file: File) => {
     // Implement your file upload logic here
-    console.log('Updating profile picture:', file);
-    
+    console.log("Updating profile picture:", file);
+
     // Example: Upload to your backend
     // const formData = new FormData();
     // formData.append('profilePicture', file);

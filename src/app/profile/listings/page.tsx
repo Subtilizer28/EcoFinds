@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 type Listing = {
@@ -44,8 +46,14 @@ const initialListings: Listing[] = [
 
 export default function MyListings() {
   const [search, setSearch] = useState('');
-  const [listings, setListings] = useState(initialListings);
+  const [listings] = useState(initialListings);
+  const { data: session } = useSession();
+  const router = useRouter();
 
+  if (!session) {
+    void router.push("/auth/login");
+    return null;
+  }
   // Search filtering
   const filteredListings = listings.filter((listing) =>
     listing.name.toLowerCase().includes(search.toLowerCase())

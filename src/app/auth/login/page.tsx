@@ -1,40 +1,43 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session, router]);
+
+  if (session) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
+    setLoading(true);
 
-    if (!email || !password) {
-      setError('Email and password are required');
-      return;
-    }
+    const res = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
 
-    try {
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    setLoading(false);
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || 'Sign in failed');
-        return;
-      }
-
-      setSuccess(data.message);
-      // TODO: Redirect or update UI on success
-    } catch {
-      setError('Network error');
+    if (res?.error) {
+      setError(res.error);
+    } else {
+      router.push('/');
     }
   };
 
@@ -70,16 +73,16 @@ export default function SignInPage() {
             />
           </div>
           {error && <div className="text-red-500 text-sm">{error}</div>}
-          {success && <div className="text-green-600 text-sm">{success}</div>}
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded transition"
+            disabled={loading}
           >
-            Sign In
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
         <div className="text-center text-sm mt-4 text-gray-700 dark:text-gray-300">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <a href="/auth/signup" className="text-blue-600 hover:underline dark:text-blue-400">
             Sign Up
           </a>

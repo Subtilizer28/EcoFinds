@@ -16,7 +16,7 @@ export default function Home() {
     const value = e.target.value;
     setSortOption(value);
 
-    let sortedProducts = [...products];
+    const sortedProducts = [...products];
     if (value === "low-high") {
       sortedProducts.sort((a, b) => a.price - b.price);
     } else if (value === "high-low") {

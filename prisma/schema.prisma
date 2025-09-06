@@ -20,9 +20,6 @@ model Post {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
     @@index([name])
 }
 
@@ -58,12 +55,14 @@ model User {
     id            String    @id @default(cuid())
     name          String?
     email         String?   @unique
+    password      String
     emailVerified DateTime?
+    description   String?
+    phone         String?
     image         String?
     role          Role      @default(USER)
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
     products      Product[] @relation("UserProducts")
 }
 

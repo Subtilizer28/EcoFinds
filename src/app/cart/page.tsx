@@ -1,5 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const initialCartItems = [
   {
@@ -22,6 +25,18 @@ const initialCartItems = [
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState(initialCartItems);
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (!session) {
+      router.push("/auth/login");
+    }
+  }, [session, router]);
+
+  if (!session) {
+    return null;
+  }
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return;
