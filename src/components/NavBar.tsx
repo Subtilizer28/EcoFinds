@@ -1,152 +1,115 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { FaBars, FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
-// Dummy session for demonstration. Replace with real session logic.
-const useSession = () => {
-    // Set to null for "not logged in", or an object for "logged in"
-    const session = { user: { name: "John Doe" } }; // or null
-    return { data: session };
+import React from 'react';
+import styled from 'styled-components';
+import Link from 'next/link';
+
+const Button = () => {
+  return (
+    <StyledWrapper>
+      <div className="button-container">
+        <Link href="/" aria-label="Home" className="button">
+          <svg
+            className="icon"
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth={0}
+            viewBox="0 0 1024 1024"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" />
+          </svg>
+        </Link>
+        <Link href="/search" aria-label="Search" className="button">
+          <svg
+            className="icon"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </Link>
+        <Link href="/profile" aria-label="User" className="button">
+          <svg
+            className="icon"
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth={0}
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" />
+          </svg>
+        </Link>
+        <Link href="/cart" aria-label="Cart" className="button">
+          <svg
+            className="icon"
+            stroke="currentColor"
+            fill="none"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx={9} cy={21} r={1} />
+            <circle cx={20} cy={21} r={1} />
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+          </svg>
+        </Link>
+      </div>
+    </StyledWrapper>
+  );
 };
 
-const NavBar: React.FC = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [profileOpen, setProfileOpen] = useState(false);
-    const { data: session } = useSession();
+const StyledWrapper = styled.div`
+  .button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: black;
+    width: 250px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  .button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .button:hover {
+    transform: translateY(-3px);
+  }
+  .icon {
+    font-size: 20px;
+  }
+`;
 
-    return (
-        <nav className="bg-white/80 m-4 shadow-md px-4 py-2 flex items-center justify-between relative rounded-2xl">
-            {/* Hamburger Menu */}
-            <button
-                className="md:hidden text-2xl"
-                onClick={() => setMenuOpen((prev) => !prev)}
-                aria-label="Open menu"
-            >
-                <FaBars />
-            </button>
-
-            {/* Logo */}
-            <Link href="/" className="flex items-center text-xl font-bold">
-                <span className="text-green-600">EcoFinds</span>
-            </Link>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex gap-6 items-center font-bold text-lg">
-                
-                {session && (
-                    <>
-                    <Link href="profile/listings" className="hover:text-green-600">My Listings</Link>
-                    <Link href="/addproduct" className="hover:text-green-600">Add Product</Link>
-                </>
-                )}
-            </div>
-
-            {/* Right Side: Cart & Profile/Login */}
-            <div className="flex items-center gap-4">
-                <Link href="/cart" className="relative text-2xl">
-                    <FaShoppingCart />
-                    {/* Example cart badge */}
-                    <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs rounded-full px-1">2</span>
-                </Link>
-                <div className="relative">
-                    {session ? (
-                        <>
-                            <button
-                                className="text-2xl"
-                                onClick={() => setProfileOpen((prev) => !prev)}
-                                aria-label="Profile menu"
-                            >
-                                <FaUserCircle />
-                            </button>
-                            {profileOpen && (
-                                <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-20">
-                                    <Link
-                                        href="/profile"
-                                        className="block px-4 py-2 hover:bg-gray-100"
-                                        onClick={() => setProfileOpen(false)}
-                                    >
-                                        Profile
-                                    </Link>
-                                    <Link
-                                        href="/profile/listings"
-                                        className="block px-4 py-2 hover:bg-gray-100"
-                                        onClick={() => setProfileOpen(false)}
-                                    >
-                                        My Listings
-                                    </Link>
-                                    <button
-                                        className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                                        onClick={() => setProfileOpen(false)}
-                                    >
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <Link href="/login" className="text-lg hover:text-green-600">
-                            Login
-                        </Link>
-                    )}
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            {menuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-10">
-                    <Link
-                        href="/products"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                        onClick={() => setMenuOpen(false)}
-                    >
-                        Products
-                    </Link>
-                    {session && (
-                        <Link
-                            href="profile/listings"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            My Listings
-                        </Link>
-                    )}
-                    <Link
-                        href="/cart"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                        onClick={() => setMenuOpen(false)}
-                    >
-                        Cart
-                    </Link>
-                    {session ? (
-                        <>
-                            <Link
-                                href="/profile"
-                                className="block px-4 py-2 hover:bg-gray-100"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Profile
-                            </Link>
-                            <button
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                Logout
-                            </button>
-                        </>
-                    ) : (
-                        <Link
-                            href="/login"
-                            className="block px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Login
-                        </Link>
-                    )}
-                </div>
-            )}
-        </nav>
-    );
-};
-
-export default NavBar;
+export default Button;
