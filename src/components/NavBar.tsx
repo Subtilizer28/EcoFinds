@@ -6,8 +6,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 const Button = () => {
-
-    const { data: session } = useSession();
+  const { data: session } = useSession();
   return (
     <StyledWrapper>
       <div className="button-container">
@@ -25,25 +24,9 @@ const Button = () => {
             <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" />
           </svg>
         </Link>
-        <Link href="/search" aria-label="Search" className="button">
-          <svg
-            className="icon"
-            stroke="currentColor"
-            fill="none"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </Link>
+
+        {/* Search icon link removed */}
+
         {/* Show profile if session exists, otherwise show login */}
         {typeof window !== "undefined" && session ? (
           <Link href="/profile" aria-label="User" className="button">
@@ -80,7 +63,7 @@ const Button = () => {
             </svg>
           </Link>
         )}
-        <Link href="/cart" aria-label="C</svg>art" className="button">
+        <Link href="/cart" aria-label="Cart" className="button">
           <svg
             className="icon"
             stroke="currentColor"
