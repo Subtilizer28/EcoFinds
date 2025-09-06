@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useEffect, useState } from 'react';
 
@@ -43,7 +44,7 @@ export default function ProductPage() {
             {/* Ratings */}
             <div className="flex items-center mb-6">
               <span className="flex items-center">
-                {[...Array(4)].map((_, i) => (
+                {Array.from({ length: 4 }).map((_, i) => (
                   <svg
                     key={i}
                     fill="currentColor"
