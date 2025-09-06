@@ -83,6 +83,7 @@ model Product {
     id                       Int      @id @default(autoincrement())
     userId                   String
     User                     User     @relation("UserProducts", fields: [userId], references: [id])
+    image                    String
     title                    String
     category                 String
     description              String
