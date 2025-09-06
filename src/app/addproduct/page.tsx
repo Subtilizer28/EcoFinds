@@ -44,7 +44,7 @@ export default function AddProductPage() {
           Add a New Product
         </h2>
 
-        {/* Form */}
+        {/* Formasdasd */}
         <form
           className="flex flex-col gap-6"
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
