@@ -54,10 +54,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   });
 
   return (
-    <div className="min-h-screen bg-white text-gray-800 flex justify-center items-start p-6">
+    <div className="min-h-screen bg-white text-gray-900 flex justify-center items-start p-6">
       <div className="max-w-4xl w-full space-y-8">
         {/* Profile Header Section */}
-        <div className="rounded-3xl shadow-xl bg-gray-900 text-white p-8">
+        <div className="rounded-3xl shadow-2xl bg-[#1C1C1E] text-white p-8">
           <div className="flex flex-col lg:flex-row lg:items-start gap-8">
             {/* Profile Picture */}
             <div className="flex flex-col items-center lg:items-start">
@@ -89,7 +89,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
               </div>
               <button
                 onClick={onEditProfile}
-                className="mt-5 px-6 py-2.5 bg-white text-black rounded-xl shadow hover:bg-gray-200 transition-all duration-300 flex items-center gap-2 text-base font-semibold"
+                className="mt-5 px-6 py-2.5 bg-white text-black rounded-full shadow hover:bg-gray-200 transition-all duration-300 flex items-center gap-2 text-base font-semibold"
               >
                 <Edit3 className="w-5 h-5" />
                 Edit Profile
@@ -109,7 +109,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
 
               {/* Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-800 rounded-xl p-4 flex items-center gap-3 shadow hover:scale-105 transition">
+                <div className="bg-gray-800 rounded-2xl p-4 flex items-center gap-3 shadow hover:scale-105 transition">
                   <Mail className="w-6 h-6 text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400">Email</p>
@@ -117,7 +117,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                   </div>
                 </div>
                 {user.phone && (
-                  <div className="bg-gray-800 rounded-xl p-4 flex items-center gap-3 shadow hover:scale-105 transition">
+                  <div className="bg-gray-800 rounded-2xl p-4 flex items-center gap-3 shadow hover:scale-105 transition">
                     <Phone className="w-6 h-6 text-gray-400" />
                     <div>
                       <p className="text-xs text-gray-400">Phone</p>
@@ -125,7 +125,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
                     </div>
                   </div>
                 )}
-                <div className="bg-gray-800 rounded-xl p-4 flex items-center gap-3 shadow col-span-1 md:col-span-2 hover:scale-105 transition">
+                <div className="bg-gray-800 rounded-2xl p-4 flex items-center gap-3 shadow col-span-1 md:col-span-2 hover:scale-105 transition">
                   <Calendar className="w-6 h-6 text-gray-400" />
                   <div>
                     <p className="text-xs text-gray-400">Member since</p>
@@ -138,7 +138,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
         </div>
 
         {/* Quick Actions */}
-        <div className="rounded-3xl shadow-xl bg-gray-900 text-white p-8">
+        <div className="rounded-3xl shadow-2xl bg-[#1C1C1E] text-white p-8">
           <h2 className="text-2xl font-bold mb-7">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <button
