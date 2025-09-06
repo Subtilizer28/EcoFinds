@@ -30,8 +30,8 @@ function ProfilePhotoUpload({
   };
 
   return (
-    <div className="mb-6 flex flex-col items-center">
-      <label className="flex h-28 w-28 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-[#39415c] bg-[#2c3350] transition hover:border-blue-600">
+    <div className="mb-8 flex flex-col items-center">
+      <label className="relative flex h-28 w-28 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-gray-700 bg-gray-800 transition hover:border-blue-600">
         {preview ? (
           <img
             src={preview}
@@ -40,7 +40,7 @@ function ProfilePhotoUpload({
           />
         ) : (
           <span className="px-2 text-center text-sm text-gray-400 select-none">
-            Click to add badge/profile photo
+            Click to add profile photo
           </span>
         )}
         <input
@@ -49,6 +49,9 @@ function ProfilePhotoUpload({
           className="hidden"
           onChange={handleFileChange}
         />
+        <span className="pointer-events-none absolute right-2 bottom-2 rounded-full bg-blue-600 p-1 text-white shadow-lg">
+          ✎
+        </span>
       </label>
     </div>
   );
@@ -125,28 +128,27 @@ export default function SignUpPage() {
           setError(err.message || "Registration failed");
         },
         onSettled: () => setLoading(false),
-      },
+      }
     );
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#131824] px-4 font-sans">
-      <h1 className="mb-6 text-3xl font-bold text-white">Sign Up</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-6 font-sans">
+      <h1 className="mb-8 text-4xl font-extrabold text-gray-900">Sign Up</h1>
       <ProfilePhotoUpload onFileSelected={setProfilePhoto} />
-      <div className="w-full max-w-xs rounded-xl bg-[#23293a] p-6 shadow-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          {/* ...inputs unchanged... */}
+      <div className="w-full max-w-md rounded-2xl bg-white p-10 shadow-xl">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div>
             <label
               htmlFor="displayName"
-              className="mb-1 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-semibold text-gray-700"
             >
               Display Name
             </label>
             <input
               id="displayName"
               type="text"
-              className="w-full rounded-md border border-[#39415c] bg-[#2c3350] px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               required
@@ -157,14 +159,14 @@ export default function SignUpPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-semibold text-gray-700"
             >
               Email
             </label>
             <input
               id="email"
               type="email"
-              className="w-full rounded-md border border-[#39415c] bg-[#2c3350] px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -175,14 +177,14 @@ export default function SignUpPage() {
           <div>
             <label
               htmlFor="password"
-              className="mb-1 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-semibold text-gray-700"
             >
               Password
             </label>
             <input
               id="password"
               type="password"
-              className="w-full rounded-md border border-[#39415c] bg-[#2c3350] px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -193,14 +195,14 @@ export default function SignUpPage() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="mb-1 block text-sm font-medium text-gray-300"
+              className="mb-2 block text-sm font-semibold text-gray-700"
             >
               Confirm Password
             </label>
             <input
               id="confirmPassword"
               type="password"
-              className="w-full rounded-md border border-[#39415c] bg-[#2c3350] px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              className="w-full rounded-md border border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -209,12 +211,14 @@ export default function SignUpPage() {
             />
           </div>
           {error && (
-            <div className="mb-2 text-center text-sm text-red-500">{error}</div>
+            <div className="text-center text-sm font-semibold text-red-600">
+              {error}
+            </div>
           )}
           <button
             type="submit"
-            className="mt-2 w-full rounded-md bg-[#3166fc] py-3 text-base font-semibold text-white transition hover:bg-[#254fbf]"
             disabled={loading}
+            className="mt-6 w-full rounded-lg bg-black py-3 text-lg font-semibold text-white shadow-lg hover:bg-gray-800 transition disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {loading ? "Signing up..." : "Sign up"}
           </button>

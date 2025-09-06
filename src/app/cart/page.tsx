@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -51,8 +50,11 @@ export default function CartPage() {
     setCartItems((items) => items.filter((item) => item.id !== id));
   };
 
+  // Conversion rate approx 1 GBP = 101 INR, format with INR symbol ₹
+  const convertToINR = (gbp: number) => gbp * 101;
+
   const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + convertToINR(item.price) * item.quantity,
     0
   );
 
@@ -81,7 +83,9 @@ export default function CartPage() {
                   <div className="flex-grow">
                     <h2 className="text-xl font-semibold text-gray-900">{item.name}</h2>
                     <p className="mt-1 text-gray-600 text-sm">{item.description}</p>
-                    <p className="mt-2 font-semibold text-lg text-gray-900">£{item.price.toFixed(2)}</p>
+                    <p className="mt-2 font-semibold text-lg text-gray-900">
+                      ₹{convertToINR(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                   <div className="flex flex-col items-center gap-3">
                     <input
@@ -107,7 +111,7 @@ export default function CartPage() {
 
             <div className="mt-10 flex justify-between items-center text-lg font-medium border-t border-gray-300 pt-6 rounded-md shadow-inner">
               <span className="text-gray-900">Total:</span>
-              <span className="text-3xl font-bold text-gray-900">£{total.toFixed(2)}</span>
+              <span className="text-3xl font-bold text-gray-900">₹{total.toFixed(2)}</span>
             </div>
 
             <button
