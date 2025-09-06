@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { Condition } from "@prisma/client";
@@ -57,7 +54,7 @@ export const productRouter = createTRPCRouter({
       where: { userId },
     });
 
-    return products as Product[];
+    return products;
   }),
   getListing: protectedProcedure.query(async ({ ctx }): Promise<Product[]> => {
     const userId = ctx.session.user?.id;
@@ -70,6 +67,6 @@ export const productRouter = createTRPCRouter({
       orderBy: { createdAt: "desc" },
     });
 
-    return products as Product[];
+    return products;
   }),
 });

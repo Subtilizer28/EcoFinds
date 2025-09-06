@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import React, { useEffect, useState } from 'react';
 import { api } from '~/trpc/react';
@@ -26,13 +25,13 @@ export default function ProductPage() {
       <div className="max-w-6xl w-full rounded-3xl bg-white shadow-xl p-12 flex flex-col lg:flex-row gap-16">
         {/* Main Product Image */}
         <div className="lg:w-1/2 w-full border border-gray-200 rounded-3xl bg-gray-100 flex justify-center items-center h-[480px] shadow-inner">
-          <img
+          {/* <img
             alt="ecommerce"
             className={`w-full h-full object-contain rounded-3xl transition-opacity duration-700 ${
               isVisible ? 'opacity-100' : 'opacity-0'
             }`}
             src={product.image}
-          />
+          /> */}
         </div>
 
         {/* Product Details */}

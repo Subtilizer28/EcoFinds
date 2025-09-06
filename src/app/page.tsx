@@ -108,11 +108,11 @@ export default function Home() {
             key={product.id}
             className="flex flex-col items-center rounded-3xl bg-white border border-gray-300 p-6 shadow-lg hover:scale-[1.03] hover:shadow-2xl transition-transform duration-300"
           >
-            <img
+            {/* <img
               src={product.image}
               alt={product.name}
               className="mb-5 h-32 w-32 rounded-full border-4 border-gray-200 object-cover shadow-md transition-transform duration-300 hover:scale-105"
-            />
+            /> */}
             <h3 className="mb-2 text-xl font-bold text-gray-900">{product.name}</h3>
             <p className="mb-6 text-xl font-semibold text-gray-700">₹{product.price}</p>
             <button className="mt-auto rounded-full bg-black px-6 py-3 text-white font-semibold shadow-lg hover:bg-gray-900 active:scale-95 transition-transform duration-150 focus:outline-none focus:ring-4 focus:ring-black/40">
