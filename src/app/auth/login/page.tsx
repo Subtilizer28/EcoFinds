@@ -5,14 +5,37 @@ export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+
     if (!email || !password) {
       setError('Email and password are required');
       return;
     }
-    setError('');
+
+    try {
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'Sign in failed');
+        return;
+      }
+
+      setSuccess(data.message);
+      // TODO: Redirect or update UI on success
+    } catch {
+      setError('Network error');
+    }
   };
 
   return (
@@ -47,6 +70,7 @@ export default function SignInPage() {
             />
           </div>
           {error && <div className="text-red-500 text-sm">{error}</div>}
+          {success && <div className="text-green-600 text-sm">{success}</div>}
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded transition"
