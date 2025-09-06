@@ -1,11 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 
-function ProfilePhotoUpload({ onFileSelected }) {
-  const [preview, setPreview] = useState(null);
+function ProfilePhotoUpload({
+  onFileSelected,
+}: {
+  onFileSelected: (file: File | null) => void;
+}) {
+  const [preview, setPreview] = useState<string | null>(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
     if (!file) {
       setPreview(null);
       onFileSelected(null);
@@ -13,7 +17,9 @@ function ProfilePhotoUpload({ onFileSelected }) {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      setPreview(reader.result);
+      if (typeof reader.result === 'string') {
+        setPreview(reader.result);
+      }
     };
     reader.readAsDataURL(file);
     onFileSelected(file);
@@ -23,13 +29,22 @@ function ProfilePhotoUpload({ onFileSelected }) {
     <div className="mb-6 flex flex-col items-center">
       <label className="cursor-pointer bg-[#2c3350] border border-[#39415c] rounded-full w-28 h-28 flex justify-center items-center overflow-hidden hover:border-blue-600 transition">
         {preview ? (
-          <img src={preview} alt="Profile preview" className="w-full h-full object-cover" />
+          <img
+            src={preview}
+            alt="Profile preview"
+            className="w-full h-full object-cover"
+          />
         ) : (
           <span className="text-gray-400 text-sm text-center px-2 select-none">
             Click to add badge/profile photo
           </span>
         )}
-        <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+        <input
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </label>
     </div>
   );
@@ -41,9 +56,9 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!displayName || !email || !password || !confirmPassword) {
       setError('All fields are required');
@@ -54,8 +69,11 @@ export default function SignUpPage() {
       return;
     }
     setError('');
-    // For demo, show alert. Submit logic here.
-    alert(`Welcome, ${displayName}!\nProfile photo selected: ${profilePhoto ? 'Yes' : 'No'}`);
+    alert(
+      `Welcome, ${displayName}!\nProfile photo selected: ${
+        profilePhoto ? 'Yes' : 'No'
+      }`
+    );
   };
 
   return (
@@ -70,7 +88,10 @@ export default function SignUpPage() {
       <div className="w-full max-w-xs rounded-xl bg-[#23293a] p-6 shadow-lg">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-            <label htmlFor="displayName" className="block mb-1 text-gray-300 text-sm font-medium">
+            <label
+              htmlFor="displayName"
+              className="block mb-1 text-gray-300 text-sm font-medium"
+            >
               Display Name
             </label>
             <input
@@ -78,13 +99,17 @@ export default function SignUpPage() {
               type="text"
               className="w-full px-4 py-3 rounded-md bg-[#2c3350] border border-[#39415c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
               value={displayName}
-              onChange={e => setDisplayName(e.target.value)}
+              onChange={(e) => setDisplayName(e.target.value)}
               required
               placeholder="Your name"
+              autoComplete="off"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block mb-1 text-gray-300 text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="block mb-1 text-gray-300 text-sm font-medium"
+            >
               Email
             </label>
             <input
@@ -92,13 +117,17 @@ export default function SignUpPage() {
               type="email"
               className="w-full px-4 py-3 rounded-md bg-[#2c3350] border border-[#39415c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block mb-1 text-gray-300 text-sm font-medium">
+            <label
+              htmlFor="password"
+              className="block mb-1 text-gray-300 text-sm font-medium"
+            >
               Password
             </label>
             <input
@@ -106,13 +135,17 @@ export default function SignUpPage() {
               type="password"
               className="w-full px-4 py-3 rounded-md bg-[#2c3350] border border-[#39415c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword" className="block mb-1 text-gray-300 text-sm font-medium">
+            <label
+              htmlFor="confirmPassword"
+              className="block mb-1 text-gray-300 text-sm font-medium"
+            >
               Confirm Password
             </label>
             <input
@@ -120,9 +153,10 @@ export default function SignUpPage() {
               type="password"
               className="w-full px-4 py-3 rounded-md bg-[#2c3350] border border-[#39415c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
               value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
           {error && (
