@@ -29,11 +29,11 @@ export default function AddProductPage() {
         
         {/* Header */}
         <div className="flex justify-between items-center mb-10">
-          <span className="font-bold text-2xl text-white tracking-wide">EcoFinds</span>
+         
           <div className="flex items-center gap-6">
             <div className="relative text-2xl cursor-pointer text-white">
-              🛒
-              <span className="absolute -top-1 -right-2 bg-red-500 text-xs text-white rounded-full px-1">!</span>
+             
+
             </div>
             <div className="w-10 h-10 border border-white rounded-full cursor-pointer hover:scale-105 transition-transform"></div>
           </div>

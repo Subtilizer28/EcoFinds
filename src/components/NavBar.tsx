@@ -33,7 +33,7 @@ const NavBar: React.FC = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex gap-6 items-center font-bold text-lg">
-                <Link href="/products" className="hover:text-green-600">Products</Link>
+                
                 {session && (
                     <>
                     <Link href="/my-listings" className="hover:text-green-600">My Listings</Link>
