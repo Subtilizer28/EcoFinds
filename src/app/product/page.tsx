@@ -1,151 +1,94 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-export default function AddProductPage() {
+const productImages = [
+  '/images/prod-1.jpg',
+  '/images/prod-2.jpg',
+  '/images/prod-3.jpg',
+];
+
+export default function ProductPage() {
   const [isVisible, setIsVisible] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [activeIndex] = useState(0);
 
   useEffect(() => {
     const timeout = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          setImagePreview(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
-    <section className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-black via-gray-900 to-black">
-      <div className="max-w-2xl w-full mx-auto backdrop-blur-xl bg-gray-900/80 rounded-3xl shadow-2xl border border-gray-700 p-10">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <span className="font-bold text-xl text-white tracking-widest">LOGO</span>
-          <div className="flex items-center gap-6">
-            <div className="relative text-2xl cursor-pointer">
-              🛒
-              <span className="absolute -top-1 -right-2 bg-red-500 text-xs text-white rounded-full px-1">!</span>
-            </div>
-            <div className="w-8 h-8 border border-white rounded-full cursor-pointer"></div>
-          </div>
-        </div>
-
-        {/* Title */}
-        <h2 className="text-white text-3xl mb-8 text-center font-semibold tracking-wide">
-          Add a New Product
-        </h2>
-
-        {/* Form */}
-        <form
-          className="flex flex-col gap-6"
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
-        >
-          {/* Image Upload */}
-          <div className="flex justify-center mb-6">
-            <label
-              htmlFor="productImage"
-              className={`border-2 border-dashed border-white rounded-xl w-full max-w-xs h-40 flex flex-col justify-center items-center cursor-pointer text-white font-medium transition-opacity duration-500 ${
+    <section className="body-font text-gray-300">
+      <div className="max-w-5xl mx-auto mt-20 bg-gray-800 rounded-3xl shadow-xl border border-gray-700 p-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+          {/* Main Product Image */}
+          <div className="lg:w-1/2 w-full border border-gray-600 rounded-lg bg-gray-900 flex justify-center items-center h-96">
+            <img
+              alt="ecommerce"
+              className={`w-full h-full object-cover rounded transition-opacity duration-500 ${
                 isVisible ? 'opacity-100' : 'opacity-0'
-              } hover:bg-gray-800`}
-            >
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              ) : (
-                <>
-                  <span className="text-4xl mb-2">📷</span>
-                  <span>Upload Product Image</span>
-                </>
-              )}
-            </label>
-            <input
-              id="productImage"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageUpload}
+              }`}
+              src={productImages[activeIndex]}
             />
           </div>
 
-          {/* Section: Basic Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" placeholder="Product Title" className="input-style" />
-            <input type="text" placeholder="Product Category" className="input-style" />
+          {/* Product Details */}
+          <div className="lg:w-1/2 w-full">
+            <h2 className="text-sm title-font text-gray-500 tracking-widest mb-2">
+              BRAND NAME
+            </h2>
+            <h1 className="text-white text-4xl lg:text-5xl font-semibold mb-4 leading-tight">
+              The Catcher in the Rye
+            </h1>
+
+            {/* Ratings */}
+            <div className="flex items-center mb-6">
+              <span className="flex items-center">
+                {[...Array(4)].map((_, i) => (
+                  <svg
+                    key={i}
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 text-indigo-400"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ))}
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-indigo-400"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </span>
+              <span className="text-gray-400 ml-3 text-lg">4 Reviews</span>
+            </div>
+
+            {/* Description */}
+            <p className="leading-relaxed text-gray-400 text-lg mb-8">
+              Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY.
+            </p>
+
+            {/* Price & Button */}
+            <div className="flex items-center gap-6">
+              <span className="title-font font-medium text-3xl text-white">
+                $58.00
+              </span>
+              <button className="ml-auto text-white bg-indigo-600 border-0 py-3 px-8 text-lg focus:outline-none hover:bg-indigo-700 rounded-lg">
+                Add to cart
+              </button>
+            </div>
           </div>
-
-          <textarea placeholder="Product Description" rows={3} className="input-style"></textarea>
-
-          {/* Section: Pricing & Stock */}
-          <div className="grid grid-cols-2 gap-4">
-            <input type="number" placeholder="Price" className="input-style" />
-            <input type="number" placeholder="Quantity" className="input-style" />
-          </div>
-
-          {/* Section: Specs */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" placeholder="Condition" className="input-style" />
-            <input type="number" placeholder="Year of Manufacture" className="input-style" />
-            <input type="text" placeholder="Brand" className="input-style" />
-            <input type="text" placeholder="Model" className="input-style" />
-            <input type="text" placeholder="Dimensions (L × W × H)" className="input-style" />
-            <input type="number" placeholder="Weight" className="input-style" />
-            <input type="text" placeholder="Material" className="input-style" />
-            <input type="text" placeholder="Color" className="input-style" />
-          </div>
-
-          {/* Checkboxes */}
-          <div className="flex flex-col gap-3 text-white">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" className="accent-indigo-500 w-5 h-5" />
-              Original Packaging
-            </label>
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" className="accent-indigo-500 w-5 h-5" />
-              Manual/Instructions Included
-            </label>
-          </div>
-
-          <textarea placeholder="Working Condition Description" rows={3} className="input-style"></textarea>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full mt-6 bg-indigo-600 text-white py-4 rounded-xl text-lg font-semibold hover:bg-indigo-700 transition-colors shadow-lg"
-          >
-            Add Item
-          </button>
-        </form>
+        </div>
       </div>
-
-      {/* Custom Input Styling */}
-      <style jsx>{`
-        .input-style {
-          background: transparent;
-          border-bottom: 2px solid white;
-          color: white;
-          padding: 8px;
-          outline: none;
-          transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .input-style::placeholder {
-          color: #bbb;
-        }
-        .input-style:focus {
-          border-color: #6366f1; /* Indigo */
-          box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
-        }
-      `}</style>
     </section>
   );
 }
