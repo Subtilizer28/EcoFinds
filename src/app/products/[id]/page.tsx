@@ -22,7 +22,7 @@ export default function ProductPage() {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <section className="bg-gray-50 min-h-screen flex items-center justify-center px-6 py-20 font-sans text-gray-900">
+    <section className="min-h-screen flex items-center justify-center px-6 py-20 font-sans text-gray-900">
       <div className="max-w-6xl w-full rounded-3xl bg-white shadow-xl p-12 flex flex-col lg:flex-row gap-16">
         {/* Main Product Image */}
         <div className="lg:w-1/2 w-full border border-gray-200 rounded-3xl bg-gray-100 flex justify-center items-center h-[480px] shadow-inner">

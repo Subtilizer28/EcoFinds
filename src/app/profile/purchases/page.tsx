@@ -51,7 +51,7 @@ export default function MyPurchasesPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex flex-col items-center p-6 font-sans">
+    <div className="min-h-screen text-gray-900 flex flex-col items-center p-6 font-sans">
       <h2 className="mb-8 w-full text-center text-3xl font-extrabold tracking-tight max-w-2xl bg-white rounded-xl py-4 shadow">
         My Purchases
       </h2>

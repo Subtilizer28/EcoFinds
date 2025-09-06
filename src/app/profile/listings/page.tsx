@@ -39,7 +39,7 @@ export default function MyListings() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 p-6 font-sans flex flex-col items-center">
+    <div className="min-h-screen text-gray-900 p-6 font-sans flex flex-col items-center">
       <h2 className="text-center mb-8 text-3xl font-extrabold tracking-tight w-full max-w-3xl bg-white rounded-xl py-4 shadow">
         My Listings
       </h2>

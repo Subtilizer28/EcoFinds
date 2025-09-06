@@ -31,7 +31,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
 
     return (
         <StyledWrapper>
-            <div className="min-h-screen bg-white text-black flex justify-center items-start p-6">
+            <div className="min-h-screen text-black flex justify-center items-start p-6">
                 <div className="max-w-4xl w-full space-y-6 font-sans">
                     {/* Profile Header Section */}
                     <section className="rounded-3xl bg-white shadow-md p-6 flex flex-col lg:flex-row gap-6 border border-gray-200">

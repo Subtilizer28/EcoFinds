@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useState } from 'react';
@@ -27,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-6 text-black bg-white font-sans">
+    <main className="flex min-h-screen flex-col items-center px-6 text-black font-sans">
       {/* Search and Filters */}
       <div className="mt-10 flex w-full max-w-4xl flex-col items-center gap-5 rounded-3xl p-8 border border-gray-300 bg-gray-50 shadow-sm">
         <div className="flex w-full gap-4">
@@ -80,7 +81,7 @@ export default function Home() {
       <div className="my-12 flex w-full justify-center">
         <div className="relative w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl">
           <img
-            src="/images/banner.jpg"
+            src="/image.png"
             alt="EcoFinds Banner"
             className="h-64 w-full object-cover transition-transform duration-500 hover:scale-105"
           />

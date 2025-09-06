@@ -133,7 +133,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-6 font-sans">
+    <div className="flex min-h-screen flex-col items-center justify-center px-6 font-sans">
       <h1 className="mb-8 text-4xl font-extrabold text-gray-900">Sign Up</h1>
       <ProfilePhotoUpload onFileSelected={setProfilePhoto} />
       <div className="w-full max-w-md rounded-2xl bg-white p-10 shadow-xl">
