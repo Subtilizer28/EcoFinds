@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { api } from "~/trpc/react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function ProfilePhotoUpload({
   onFileSelected,
